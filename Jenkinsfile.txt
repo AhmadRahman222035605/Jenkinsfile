@@ -22,7 +22,7 @@ pipeline {
         
         stage('Security Scan') {
             steps {
-                sh 'mvn verify -Psecurity'
+                sh 'mvn dependency-check:check'
             }
         }
         
@@ -51,6 +51,7 @@ pipeline {
         }
     }
     
+
     post {
         always {
             // Send email notifications at the end of test and security scan stages
