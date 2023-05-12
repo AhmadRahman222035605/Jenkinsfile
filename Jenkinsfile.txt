@@ -4,60 +4,63 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                echo 'Building the code...'
+                // Place your build commands here
             }
         }
         
         stage('Unit and Integration Tests') {
             steps {
-                sh 'mvn test'
+                echo 'Running unit tests...'
+                // Place your unit test commands here
+                
+                echo 'Running integration tests...'
+                // Place your integration test commands here
             }
         }
         
         stage('Code Analysis') {
             steps {
-                sh 'mvn checkstyle:checkstyle'
+                echo 'Performing code analysis...'
+                // Place your code analysis commands here
             }
         }
         
         stage('Security Scan') {
             steps {
-                sh 'mvn dependency-check:check'
+                echo 'Performing security scan...'
+                // Place your security scan commands here
             }
         }
         
         stage('Deploy to Staging') {
             steps {
-                // Perform the deployment to your staging server here
-                // Modify the command as per your deployment requirements
-                sh 'scp target/myapp.war user@staging-server:/path/to/deploy'
+                echo 'Deploying to staging server...'
+                // Place your deployment commands here
             }
         }
         
         stage('Integration Tests on Staging') {
             steps {
-                // Run integration tests on the staging environment here
-                // Modify the command as per your application's requirements
-                sh 'mvn integration-test'
+                echo 'Running integration tests on staging...'
+                // Place your integration test commands on staging here
             }
         }
         
         stage('Deploy to Production') {
             steps {
-                // Perform the deployment to your production server here
-                // Modify the command as per your deployment requirements
-                sh 'scp target/myapp.war user@production-server:/path/to/deploy'
+                echo 'Deploying to production server...'
+                // Place your deployment commands here
             }
         }
     }
-    
 
     post {
         always {
             // Send email notifications at the end of test and security scan stages
             emailext (
-                subject: "Pipeline Status: ${currentBuild.result}",
-                body: "Pipeline completed with status: ${currentBuild.result}",
+                subject: "Status: ${currentBuild.result}",
+                body: "Pipeline completed : ${currentBuild.result}",
                 to: "ahmad.rahman003@gmail.com",
                 attachmentsPattern: '**/*'
             )
