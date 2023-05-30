@@ -5,59 +5,59 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the code...'
-                // Place your build commands here
+             
             }
         }
         
         stage('Unit and Integration Tests') {
             steps {
                 echo 'Running unit tests...'
-                // Place your unit test commands here
+             
                 
                 echo 'Running integration tests...'
-                // Place your integration test commands here
+               
             }
         }
         
         stage('Code Analysis') {
             steps {
                 echo 'Performing code analysis...'
-                // Place your code analysis commands here
+              
             }
         }
         
         stage('Security Scan') {
             steps {
                 echo 'Performing security scan...'
-                // Place your security scan commands here
+               
             }
         }
         
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying to staging server...'
-                // Place your deployment commands here
+                
             }
         }
         
         stage('Integration Tests on Staging') {
             steps {
                 echo 'Running integration tests on staging...'
-                // Place your integration test commands on staging here
+              
             }
         }
         
         stage('Deploy to Production') {
             steps {
                 echo 'Deploying to production server...'
-                // Place your deployment commands here
+               
             }
         }
     }
 
     post {
         always {
-            // Send email notifications at the end of test and security scan stages
+            // email notifications
             emailext (
                 subject: "Status: ${currentBuild.result}",
                 body: "Pipeline completed : ${currentBuild.result}",
